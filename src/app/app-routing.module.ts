@@ -12,7 +12,8 @@ const routes: Routes = [
   { path: 'plans',  canLoad: [AuthGuard, CoachUidGuard],  loadChildren: './plans/plans.module#PlansPageModule' },
   { path: 'drills',  canLoad: [AuthGuard, CoachUidGuard], loadChildren: './drills/drills.module#DrillsPageModule' },
   { path: 'forgot-password', loadChildren: './forgot-password/forgot-password.module#ForgotPasswordPageModule' },
-  { path: 'select-coach', loadChildren: './select-coach/select-coach.module#SelectCoachPageModule' },
+  { path: 'select-coach', loadChildren: './select-coach/select-coach.module#SelectCoachPageModule' },  { path: 'profile', loadChildren: './profile/profile.module#ProfilePageModule' },
+
 
 
 

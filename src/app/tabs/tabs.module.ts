@@ -22,6 +22,9 @@ const routes: Routes = [
         path: 'drills',
         loadChildren: "../drills/drills.module#DrillsPageModule"
       },{
+        path: 'profile',
+        loadChildren: "../profile/profile.module#ProfilePageModule"
+      },{
         path: '',
         redirectTo: 'home',
         pathMatch: "Full"

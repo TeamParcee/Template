@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Profile</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()" fill="clear">
+        Log Out
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="user">
+    <p text-center>
+      <img src="" height="200" width="200">
+    </p>
+
+    <ion-item>
+      <ion-label position="floating">First Name</ion-label>
+      <ion-input [(ngModel)]="user.fname"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Last Name</ion-label>
+      <ion-input [(ngModel)]="user.lname"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Coach</ion-label>
+      <ion-input [(ngModel)]="coachName"></ion-input>
+    </ion-item>
+  </ion-list>
+</ion-content>

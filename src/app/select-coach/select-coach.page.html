@@ -13,12 +13,12 @@
 
   <ion-list>
 
-    <ion-item *ngFor="let coach of coaches">
+    <ion-item (click)="selectCoach(coach)" *ngFor="let coach of coaches">
       <ion-avatar slot="start">
         <img [src]="coach.photoURL">
       </ion-avatar>
       <ion-label>
-        {{ coach.name }}
+        {{ coach.fname + " " + coach.lname}}
       </ion-label>
     </ion-item>
   </ion-list>
