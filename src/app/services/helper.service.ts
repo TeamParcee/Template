@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AlertController, ToastController, LoadingController, PopoverController, ModalController } from '@ionic/angular';
 import { AlertInput } from '@ionic/core';
+import { resolve } from 'url';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class HelperService {
     private modalCtrl: ModalController,
   ) { }
 
- 
+
   showLoading() {
 
     this.loadingCtrl.create();
@@ -102,19 +103,29 @@ export class HelperService {
   }
 
   presentPopover(ev: Event, component) {
-    this.popoverCtrl.create({
-      component: component,
-      event: ev,
-      translucent: true
-    }).then((popover) => {
-      popover.present();
+
+    return new Promise((resolve) => {
+      return this.popoverCtrl.create({
+        component: component,
+        event: ev,
+        translucent: true
+      }).then((popover) => {
+        popover.present();
+        popover.onDidDismiss().then((result) => {
+          return resolve(result)
+        })
+      })
     })
+
   }
   closePopover() {
     this.popoverCtrl.dismiss();
   }
-
-
+  closePopoverWithData(data) {
+    this.popoverCtrl.dismiss(data)
+  }
+  getPopoverData() {
+  }
   showToast(message) {
     this.toastCtrl.create({
       message: message,

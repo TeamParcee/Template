@@ -1,9 +1,23 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Login</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content padding>
+  <h2 class="logo">GFPlanner</h2>
 
-<ion-content>
+  <form [formGroup]="loginForm">
+    <ion-list>
+      <ion-item>
+        <ion-label color="primary" position="floating">Email</ion-label>
+        <ion-input formControlName="email" type="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" position="floating">Password</ion-label>
+        <ion-input formControlName="password" type="password"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-button [disabled]="!loginForm.valid" (click)="login()" expand="block">Login</ion-button>
+    <ion-button routerLink="/create-account" expand="block" color="primary" fill="clear">Dont have an account? Sign Up
+    </ion-button>
+    <ion-button routerLink="/forgot-password" expand="block" color="dark" fill="clear">Forgot Password</ion-button>
+  </form>
+
+
 
 </ion-content>

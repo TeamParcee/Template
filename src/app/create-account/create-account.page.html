@@ -1,9 +1,39 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Create-Account</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="login"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Create Account</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
+  <h2 class="welcome-text">Welcome to GFPlanner</h2>
+  <form [formGroup]="registerForm">
+    <ion-list>
+      <ion-item>
+        <ion-label color="primary" position="floating">Full Name</ion-label>
+        <ion-input name="displayName" id="displayName" formControlName="displayName"></ion-input>
+      </ion-item>
+      <ion-text *ngIf="registerForm.controls.displayName?.touched && registerForm.controls.displayName.invalid"
+        text-center color="danger">Full Name must have at least 2 charaters
+      </ion-text>
+      <ion-item>
+        <ion-label color="primary" position="floating">Email</ion-label>
+        <ion-input type="email" formControlName="email"></ion-input>
+      </ion-item>
+
+      <ion-text *ngIf="registerForm.controls.email?.touched && registerForm.controls.email?.invalid" text-center
+        color="danger">Email is not formated correctly</ion-text>
+      <ion-item>
+        <ion-label color="primary" position="floating">Password</ion-label>
+        <ion-input type="password" formControlName="password"></ion-input>
+      </ion-item>
+      <ion-text *ngIf="registerForm.controls.password?.touched && registerForm.controls.password?.invalid" text-center
+        color="danger">Password must have at least 6 charaters</ion-text>
+    </ion-list>
+    <ion-button (click)="register()" [disabled]="!registerForm.valid" expand="block">Create Account</ion-button>
+    <p text-center>By clicking "Create Account" your agree to GFPlanners <b>Terms & Condistions</b></p>
+  </form>
 
 </ion-content>

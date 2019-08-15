@@ -1,0 +1,10 @@
+<ion-list>
+  <ion-item (click)="selectPlan()" *ngFor="let plan of plans">
+    {{ plan.date | date }}
+  </ion-item>
+  <ion-item (click)="newPlan()">
+    <ion-label color="primary">
+      New Practice Plan
+    </ion-label>
+  </ion-item>
+</ion-list>
