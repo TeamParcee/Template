@@ -20,19 +20,23 @@ export class PlansPage implements OnInit {
   plans = [];
   currentPlan;
   newPlan: Plan;
+  showStartTime = false;
   ngOnInit() {
   }
 
   ionViewWillEnter(){
     this.getPlans();
+    this.getCurrentPlan();
   }
   getCurrentPlan(){
-
+    firebase.firestore().doc("users/" + "" + "currentPlan/plan").onSnapshot((planSnap)=>{
+      this.currentPlan = planSnap.data();
+    })
   }
   showCreatePlan(event){
-    console.log(event);
-    this.helper.presentPopover(event, CreatePlanComponent).then((result)=>{
-      console.log()
+    this.helper.presentPopover(event, CreatePlanComponent).then((result:any)=>{
+      let plan = result.data;
+      this.firebaseService.setDocument("/currentPlan/plan", plan);
     })
   }
   createPlan(){
@@ -45,7 +49,14 @@ export class PlansPage implements OnInit {
         plans.push(plan.data())
       })
       this.plans = plans;
-      console.log(this.plans, "plans")
     })
+  }
+
+  timeChanged(event){
+    this.showStartTime = false;
+  }
+
+  saveCurrentPlan(){
+   
   }
 }

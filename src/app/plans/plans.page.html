@@ -10,8 +10,18 @@
 
     <ion-row>
       <ion-col>
-        <ion-button  (click)="showCreatePlan($event)"  fill="clear">{{ (currentPlan?.date) ? "Date: " + currentPlan.date : "Create a Plan" }}</ion-button>
-        <ion-button *ngIf="currentPlan" fill="clear">{{ (currentPlan?.startTime) ? "Start Time: " + currentPlan.startTime : "Add Start Time" }}</ion-button>
+        <ion-button (click)="showCreatePlan($event)" fill="clear">
+          {{ (currentPlan?.date) ? "Date: " + (currentPlan.date | date) : "Create a Plan" }}</ion-button>
+
+        <ion-button (click)="showStartTime = !showStartTime" *ngIf="currentPlan" fill="clear">
+          {{ (currentPlan?.startTime) ? "Start Time: " + (currentPlan.startTime | date: 'shortTime') : "Add Start Time" }}</ion-button>
+
+        <ion-item *ngIf="showStartTime">
+          <ion-label position="stacked">Start Time</ion-label>
+          <ion-datetime  [(ngModel)]="currentPlan.startTime" (ionChange)="timeChanged($event)" minuteValues="00, 05, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55," displayFormat="hh:mm a"
+            pickerFormat="hh:mm a"></ion-datetime>
+        </ion-item>
+
       </ion-col>
     </ion-row>
 

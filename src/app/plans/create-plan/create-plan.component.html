@@ -1,5 +1,5 @@
 <ion-list>
-  <ion-item (click)="selectPlan()" *ngFor="let plan of plans">
+  <ion-item (click)="selectPlan(plan)" *ngFor="let plan of plans">
     {{ plan.date | date }}
   </ion-item>
   <ion-item (click)="newPlan()">

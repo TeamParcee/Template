@@ -24,7 +24,7 @@ export class CreatePlanComponent implements OnInit {
 
   plan: Plan;
   plans: Plan[];
-
+  
   ionViewWillEnter(){
     this.getPlans()
   }
@@ -52,7 +52,7 @@ export class CreatePlanComponent implements OnInit {
     })
   }
 
-  selectPlan(){
-    
+  selectPlan(plan){
+    this.helper.closePopoverWithData(plan);
   }
 }

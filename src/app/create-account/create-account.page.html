@@ -12,7 +12,19 @@
   <form [formGroup]="registerForm">
     <ion-list>
       <ion-item>
-        <ion-label color="primary" position="floating">Full Name</ion-label>
+        <ion-label color="primary" position="floating">Are you a Head Coach</ion-label>
+        <ion-checkbox slot="end" checked="false" name="coach" id="coach" formControlName="coach"></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" position="floating">First Name</ion-label>
+        <ion-input name="fnam" id="fname" formControlName="fname"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" position="floating">Last Name</ion-label>
+        <ion-input name="lname" id="lname" formControlName="lname"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" position="floating">Username</ion-label>
         <ion-input name="displayName" id="displayName" formControlName="displayName"></ion-input>
       </ion-item>
       <ion-text *ngIf="registerForm.controls.displayName?.touched && registerForm.controls.displayName.invalid"

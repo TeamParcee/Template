@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Select Coach</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()" fill="clear">
+        Log Out
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+
+    <ion-item *ngFor="let coach of coaches">
+      <ion-avatar slot="start">
+        <img [src]="coach.photoURL">
+      </ion-avatar>
+      <ion-label>
+        {{ coach.name }}
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

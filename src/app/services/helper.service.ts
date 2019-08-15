@@ -112,7 +112,7 @@ export class HelperService {
       }).then((popover) => {
         popover.present();
         popover.onDidDismiss().then((result) => {
-          return resolve(result)
+          return resolve(result);
         })
       })
     })

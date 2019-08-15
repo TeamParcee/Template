@@ -33,6 +33,18 @@ export class FirebaseService {
     })
   }
 
+  addUserData(col, obj) {
+
+    return new Promise((resolve) => {
+
+      return firebase.firestore().doc(col + "/" + obj.uid).set(obj).then(() => {
+        resolve()
+      }).catch((e) => {
+        console.log(e)
+      })
+    })
+  }
+
   setDocument(doc, obj) {
 
     return new Promise((resolve) => {
@@ -94,8 +106,7 @@ export class FirebaseService {
           displayName: displayName,
           photoURL: photoURL,
         })
-      }).then(() => {
-        return resolve()
+        return resolve(result.user);
       }).catch((e) => {
         console.log(e)
       })

@@ -14,6 +14,7 @@ import { SharedModule } from './shared/shared.module';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import * as firebase from 'firebase';
 import { CreatePlanComponent } from './plans/create-plan/create-plan.component';
+import { IonicStorageModule } from '@ionic/storage';
 
   // Your web app's Firebase configuration
   var firebaseConfig = {
@@ -43,6 +44,7 @@ import { CreatePlanComponent } from './plans/create-plan/create-plan.component';
     SharedModule,
     ReactiveFormsModule,
     IonicModule.forRoot(), 
+    IonicStorageModule.forRoot(),
     AppRoutingModule],
   providers: [
     StatusBar,
