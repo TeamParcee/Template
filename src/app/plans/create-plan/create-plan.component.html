@@ -11,7 +11,7 @@
       </ion-row>
       <ion-row>
         <ion-button color="dark" fill="clear" size="small" (click)="selectPlan(plan)">Make Current Plan</ion-button>
-        <ion-button color="dark" fill="clear" size="small">Edit Current Plan</ion-button>
+        <ion-button color="dark" fill="clear" size="small" [routerLink]="['/plans/edit-plan/', plan.id]">Edit Current Plan</ion-button>
       </ion-row>
     </ion-grid>
 

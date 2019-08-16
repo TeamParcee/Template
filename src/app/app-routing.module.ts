@@ -13,7 +13,10 @@ const routes: Routes = [
   { path: 'drills',  canLoad: [AuthGuard, CoachUidGuard], loadChildren: './drills/drills.module#DrillsPageModule' },
   { path: 'forgot-password', loadChildren: './forgot-password/forgot-password.module#ForgotPasswordPageModule' },
   { path: 'select-coach', loadChildren: './select-coach/select-coach.module#SelectCoachPageModule' },
-  { path: 'profile', loadChildren: './profile/profile.module#ProfilePageModule' },
+  { path: 'profile', loadChildren: './profile/profile.module#ProfilePageModule' },  { path: 'edit-plan', loadChildren: './plans/edit-plan/edit-plan.module#EditPlanPageModule' },
+  { path: 'edit-activity', loadChildren: './plans/edit-activity/edit-activity.module#EditActivityPageModule' },
+  { path: 'view-activity', loadChildren: './plans/view-activity/view-activity.module#ViewActivityPageModule' },
+
 
 
 

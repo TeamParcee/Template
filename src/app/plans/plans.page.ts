@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
 import { FirebaseService } from '../services/firebase.service';
 import { HelperService } from '../Services/helper.service';
-import { PlanService, Plan } from '../services/plan.service';
+import { PlanService, Plan, Activity } from '../services/plan.service';
 import { CreatePlanComponent } from './create-plan/create-plan.component';
 @Component({
   selector: 'app-plans',
@@ -19,46 +19,63 @@ export class PlansPage implements OnInit {
 
   plans = [];
   currentPlan;
+  activities;
   newPlan: Plan;
   showStartTime = false;
   ngOnInit() {
   }
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     this.getPlans();
     this.getCurrentPlan();
+    this.getActivities();
   }
-  getCurrentPlan(){
-    firebase.firestore().doc("users/" + this.firebaseService.user.uid + "/currentPlan/plan").onSnapshot((planSnap)=>{
+  getCurrentPlan() {
+    firebase.firestore().doc("users/" + this.firebaseService.user.uid + "/currentPlan/plan").onSnapshot((planSnap) => {
       this.currentPlan = planSnap.data();
     })
   }
-  showCreatePlan(event){
-    this.helper.presentPopover(event, CreatePlanComponent).then((result:any)=>{
+  showCreatePlan(event) {
+    this.helper.presentPopover(event, CreatePlanComponent).then((result: any) => {
       let plan = result.data;
       this.firebaseService.setDocument("users/" + this.firebaseService.user.uid + "/currentPlan/plan", plan);
     })
   }
-  createPlan(){
+  createPlan() {
     this.firebaseService.addDocument("plans", this.newPlan)
   }
-  getPlans(){
-    firebase.firestore().collection("plans").onSnapshot((planSnap)=>{
+  getPlans() {
+    firebase.firestore().collection("plans").onSnapshot((planSnap) => {
       let plans = [];
-      planSnap.forEach((plan)=>{
+      planSnap.forEach((plan) => {
         plans.push(plan.data())
       })
       this.plans = plans;
     })
   }
 
-  timeChanged(event, ){
+  timeChanged(event, ) {
     this.showStartTime = false;
     this.saveCurrentPlan()
   }
 
-  saveCurrentPlan(){
+  saveCurrentPlan() {
     this.firebaseService.setDocument("users/" + this.firebaseService.user.uid + "/currentPlan/plan", this.currentPlan);
     this.firebaseService.setDocument("users/" + this.firebaseService.user.uid + "/plans/" + this.currentPlan.id, this.currentPlan);
   }
+
+  newActivity() {
+    let activity: Activity = new Activity("", "New Activity", "", "");
+    this.firebaseService.addDocument("users/" + this.firebaseService.user.uid + "/plans", activity);
+  }
+  getActivities() {
+    firebase.firestore().collection("users/" + this.firebaseService.user.uid + "/plans").onSnapshot((snap) => {
+      let activities = [];
+      snap.forEach((activity) => {
+        activities.push(activity.data())
+      })
+      this.activities = activities;
+    })
+  }
+  
 }

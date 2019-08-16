@@ -14,11 +14,13 @@
           {{ (currentPlan?.date) ? "Current Plan: " + (currentPlan.date | date) : "View Plans" }}</ion-button>
 
         <ion-button (click)="showStartTime = !showStartTime" *ngIf="currentPlan" fill="clear">
-          {{ (currentPlan?.startTime) ? "Start Time: " + (currentPlan.startTime | date: 'shortTime') : "Add Start Time" }}</ion-button>
+          {{ (currentPlan?.startTime) ? "Start Time: " + (currentPlan.startTime | date: 'shortTime') : "Add Start Time" }}
+        </ion-button>
 
         <ion-item *ngIf="showStartTime">
           <ion-label position="stacked">Start Time</ion-label>
-          <ion-datetime  [(ngModel)]="currentPlan.startTime" (ionChange)="timeChanged($event)" minuteValues="00, 05, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55," displayFormat="hh:mm a"
+          <ion-datetime [(ngModel)]="currentPlan.startTime" (ionChange)="timeChanged($event)"
+            minuteValues="00, 05, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55," displayFormat="hh:mm a"
             pickerFormat="hh:mm a"></ion-datetime>
         </ion-item>
 
@@ -34,7 +36,7 @@
     </ion-row>
 
     <!-- No Pratice Plans -->
-    <ion-row *ngIf="plans?.length != 0">
+    <ion-row>
       <ion-col>
         <ion-list>
           <ion-item>
@@ -42,10 +44,10 @@
               <p>Total Time: xxx Minutes</p>
             </ion-label>
           </ion-item>
-          <ion-item>
-            <ion-label (click)="viewActivity(activity)">
-              Water Break
-              <p>10 Minutes - 6:30 PM</p>
+          <ion-item *ngFor="let activity of activities">
+            <ion-label [routerLink]="">
+              <h2>{{ activity.name }}</h2>
+              <p>{{ activity.duration }} Minutes - {{ activity.startTime }}</p>
             </ion-label>
             <ion-button size="small" fill="clear" (click)="editActivity(activity)" color="dark">Edit</ion-button>
           </ion-item>

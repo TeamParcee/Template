@@ -18,10 +18,10 @@ export class Plan {
 }
 export class Activity {
   constructor(
-    public id: string,
-    public name: string,
-    public date: string,
-    public startTime: string
+    public id?: string,
+    public name?: string,
+    public date?: string,
+    public startTime?: string
   ){}
 
 }
