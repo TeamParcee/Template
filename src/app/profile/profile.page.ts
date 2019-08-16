@@ -21,13 +21,12 @@ export class ProfilePage implements OnInit {
   ) { }
 
   user;
-  coachName;
+  coach;
   
   ngOnInit() {
   }
   ionViewWillEnter() {
     this.getUser();
-
   }
   ionViewDidEnter() {
     this.getUserData();
@@ -48,9 +47,15 @@ export class ProfilePage implements OnInit {
   getUserData() {
     firebase.firestore().doc('users/' + this.user.uid).onSnapshot((userSnap) => {
       this.user = userSnap.data();
+      this.getCoachData();
     })
   }
 
+  getCoachData(){
+    firebase.firestore().doc('users/' + this.user.coachUid).onSnapshot((userSnap) => {
+      this.coach = userSnap.data();
+    })
+  }
   getUser() {
     firebase.auth().onAuthStateChanged((user) => {
       this.user = user;

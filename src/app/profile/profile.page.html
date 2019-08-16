@@ -23,9 +23,9 @@
       <ion-label position="floating">Last Name</ion-label>
       <ion-input [(ngModel)]="user.lname"></ion-input>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="coach">
       <ion-label position="floating">Coach</ion-label>
-      <ion-input [(ngModel)]="coachName"></ion-input>
+      <ion-input [(ngModel)]="coach.lname"></ion-input>
     </ion-item>
   </ion-list>
 </ion-content>
