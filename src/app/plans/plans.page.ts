@@ -29,14 +29,14 @@ export class PlansPage implements OnInit {
     this.getCurrentPlan();
   }
   getCurrentPlan(){
-    firebase.firestore().doc("users/" + "" + "currentPlan/plan").onSnapshot((planSnap)=>{
+    firebase.firestore().doc("users/" + this.firebaseService.user.uid + "/currentPlan/plan").onSnapshot((planSnap)=>{
       this.currentPlan = planSnap.data();
     })
   }
   showCreatePlan(event){
     this.helper.presentPopover(event, CreatePlanComponent).then((result:any)=>{
       let plan = result.data;
-      this.firebaseService.setDocument("/currentPlan/plan", plan);
+      this.firebaseService.setDocument("users/" + this.firebaseService.user.uid + "/currentPlan/plan", plan);
     })
   }
   createPlan(){
@@ -52,11 +52,13 @@ export class PlansPage implements OnInit {
     })
   }
 
-  timeChanged(event){
+  timeChanged(event, ){
     this.showStartTime = false;
+    this.saveCurrentPlan()
   }
 
   saveCurrentPlan(){
-   
+    this.firebaseService.setDocument("users/" + this.firebaseService.user.uid + "/currentPlan/plan", this.currentPlan);
+    this.firebaseService.setDocument("users/" + this.firebaseService.user.uid + "/plans/" + this.currentPlan.id, this.currentPlan);
   }
 }

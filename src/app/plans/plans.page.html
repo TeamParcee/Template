@@ -11,7 +11,7 @@
     <ion-row>
       <ion-col>
         <ion-button (click)="showCreatePlan($event)" fill="clear">
-          {{ (currentPlan?.date) ? "Date: " + (currentPlan.date | date) : "Create a Plan" }}</ion-button>
+          {{ (currentPlan?.date) ? "Current Plan: " + (currentPlan.date | date) : "View Plans" }}</ion-button>
 
         <ion-button (click)="showStartTime = !showStartTime" *ngIf="currentPlan" fill="clear">
           {{ (currentPlan?.startTime) ? "Start Time: " + (currentPlan.startTime | date: 'shortTime') : "Add Start Time" }}</ion-button>
@@ -27,9 +27,9 @@
 
     <!-- No Pratice Plans -->
 
-    <ion-row>
+    <ion-row *ngIf="!currentPlan">
       <ion-col>
-        <h4 text-center>You currently dont have any Practice Plans</h4>
+        <h4 text-center>You currently dont have any Practice Plan Selected</h4>
       </ion-col>
     </ion-row>
 

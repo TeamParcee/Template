@@ -12,33 +12,39 @@ import * as firebase from 'firebase';
   providedIn: 'root'
 })
 export class CoachUidGuard implements CanLoad {
-  
+
   constructor(
     private firebaseService: FirebaseService,
     private navCtrl: NavController,
     private helper: HelperService,
     private ls: Storage
-  ){
-    this.getUser()
+  ) {
   }
 
   user;
-  async canLoad(route: Route, segments: UrlSegment[])  {
-    this.firebaseService.getUserData(this.user.uid).then(async (user:any)=>{
-      let coach = this.firebaseService.getUserData(user.coachUid)
-    })
-
-    if(coach){
-      return true
-    } else {
-      this.navCtrl.navigateForward("/select-coach");
-      return false;
-    }
+  async canLoad(route: Route, segments: UrlSegment[]) {
+    // this.user = await this.getUser();
+    // return this.firebaseService.getUserData(this.user.uid).then(async (user: any) => {
+    //   let coach = await this.firebaseService.getUserData(user.coachUid);
+    //   console.log(coach);
+    //   return false;
+    //   // if (coach) {
+    //   //   return true
+    //   // } else {
+    //   //   this.navCtrl.navigateForward("/select-coach");
+    //   //   return false;
+    //   // }
+    // })
+    return true;
   }
 
-  getUser(){
-    firebase.auth().onAuthStateChanged((user)=>{
-      this.user = user;
+
+  getUser() {
+    return new Promise((resolve) => {
+      return firebase.auth().onAuthStateChanged((user) => {
+        return resolve(user);
+
+      })
     })
   }
 }

@@ -4,6 +4,7 @@ import { HelperService } from 'src/app/Services/helper.service';
 import { AlertInput } from '@ionic/core';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import * as firebase from 'firebase';
+import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
 
 @Component({
   selector: 'app-create-plan',
@@ -24,7 +25,8 @@ export class CreatePlanComponent implements OnInit {
 
   plan: Plan;
   plans: Plan[];
-  
+  user;
+
   ionViewWillEnter(){
     this.getPlans()
   }
@@ -36,12 +38,13 @@ export class CreatePlanComponent implements OnInit {
     }
     this.helper.inputAlert("New Plan", "Enter the date of the new Practice Plan", [options]).then((result) => {
       let plan = new Plan("", result.toString(), "");
-      this.firebaseService.addDocument("plans", plan)
+      plan.uid = this.firebaseService.user.uid;
+      this.firebaseService.addDocument("/users/" + this.firebaseService.user.uid + "/plans", {...plan})
     })
   }
 
   getPlans() {
-    firebase.firestore().collection("plans")
+    firebase.firestore().collection("/users/" + this.firebaseService.user.uid + "/plans")
     .orderBy("date")
     .onSnapshot((planSnap) => {
       let plans = [];

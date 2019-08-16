@@ -11,13 +11,17 @@ export class FirebaseService {
   constructor(
   ) {
 
-
+    firebase.auth().onAuthStateChanged((user)=>{
+      this.user = user;
+    })
   }
 
 
-  public user = firebase.auth().currentUser;
+  public user;
 
-
+  ionViewWillEnter(){
+    
+  }
 
   addDocument(col, obj) {
 
