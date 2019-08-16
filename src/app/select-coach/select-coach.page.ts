@@ -44,7 +44,7 @@ export class SelectCoachPage implements OnInit {
     this.helper.confirmationAlert("Select Coach", "Are you sure you want to select " + coach.displayName + "as your coach?", { denyText: "Cancel", confirmText: "Select Coach" })
       .then((result) => {
         if (result) {
-          this.firebaseService.setDocument("users/" + this.user.uid, {coachUid: coach.uid})
+          this.firebaseService.updateDocument("users/" + this.user.uid, {coachUid: coach.uid})
           this.navCtrl.navigateBack("/tabs/home");
         }
       })
